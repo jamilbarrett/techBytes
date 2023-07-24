@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/User');
+const Article = require('../models/Article')
 
 // Middleware
 function isAuthenticated(req, res, next) {

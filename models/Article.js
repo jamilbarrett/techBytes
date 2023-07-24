@@ -1,10 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
-const db = require('../db/connection');
+const db = require('../config/connection.js');
 
-class Article extends Model {}
+class Article extends Model { }
 
-Article.init(
-  {
+Article.init({
     article_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,

@@ -1,34 +1,36 @@
-const path = require('path');
-const express = require('express');
-const exphbs = require('express-handlebars')
-const hbs = exphbs.create({extname: '.hbs'})
-const session = require('express-session')
-require('dotenv').config()
-// const routes = require('./controllers');
+//Requires
+require("dotenv").config();
+const express = require("express");
+const { engine } = require("express-handlebars");
+const session = require("express-session");
+
+// Import our db connection
+const db = require("./config/connection");
 
 
+// Import routes
+const user_routes = require("./controllers/user_routes");
+const view_routes = require("./controllers/view_routes");
 
-// Import the db connection
-const db = require('./config/connection');
-
-// Import our routes
-const user_routes = require('./controllers/user_routes.js')
-const view_routes = require('./controllers/view_routes.js')
 
 const app = express();
 const PORT = process.env.PORT || 3333;
 
-
-// Establishing hbs as a suffix
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-
-
-// MiddleWare
-app.use(express.json());
+// Middleware
+app.use(express.json()); // Allows the client/browser to send json in a request
+// Allow standard encoded form data submissions
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static("public")); // Allows the client/browser to access any folders or files in public - opens this folder at the root
 
+// Setup Handlebars Template Engine
+app.engine("hbs", engine({
+  // layout directory that allows you to avoid repeated html code
+  layoutsDir: "./views/layout",
+  // Set the extension for your handlebars files to .hbs
+  extname: "hbs"
+}));
+app.set("view engine", "hbs");
+app.set("views", "./views");
 
 // Load Sessions
 app.use(session({
@@ -41,11 +43,12 @@ app.use(session({
   }
 }));
 
-// app.use(routes);
-app.use("/", [user_routes, view_routes]);
+// Load Routes
+app.use("/", [view_routes, user_routes]);
 
-
-// Database must sequelize before the server starts
-db.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
-});
+// Connect to the db and create all tables based off of our models
+db.sync({ force: false })
+  .then(() => {
+    // Start server
+    app.listen(PORT, () => console.log("Server started on port %s", PORT));
+  });
