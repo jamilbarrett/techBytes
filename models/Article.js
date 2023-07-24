@@ -13,12 +13,8 @@ Article.init({
       type: DataTypes.STRING,
       allowNull: false,
     },
-    content: {
+    entry: {
       type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    author: {
-      type: DataTypes.STRING,
       allowNull: false,
     },
   },
