@@ -18,11 +18,18 @@ router.post('/login', async (req, res) => {
           email: formIdentifier
         }
       });
+    } else {
+      // Otherwise, assume it's a username and search by username
+      user = await User.findOne({
+        where: {
+          username: formIdentifier
+        }
+      });
     }
 
-    // Handle email not found
-    if (!email) {
-      console.log("user/email not found")
+    // Handle user not found
+    if (!user) {
+      console.log("user not found")
       return res.redirect('/register');
     }
 
