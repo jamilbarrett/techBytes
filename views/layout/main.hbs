@@ -14,7 +14,8 @@
 
 <body>
   <div class="bg-white">
-    <header class="bg-cover bg-no-repeat bg-center py-12 h-25" style="background-image: url('https://img.freepik.com/free-photo/black-white-bokeh-particles_1017-3297.jpg?w=1480&t=st=1690165315~exp=1690165915~hmac=232fed5ba5f9651703637731c814b22b76eceb150b3f23912e27f7258c983421');">
+    <header class="bg-cover bg-no-repeat bg-center py-12 h-25"
+      style="background-image: url('https://img.freepik.com/free-photo/black-white-bokeh-particles_1017-3297.jpg?w=1480&t=st=1690165315~exp=1690165915~hmac=232fed5ba5f9651703637731c814b22b76eceb150b3f23912e27f7258c983421');">
       <div class="flex justify-between items-center">
         <!-- Flexbox container for centering on small screens and left-aligning on large screens -->
         <h1 class="text-5xl m-0 p-1">
@@ -29,17 +30,18 @@
           <!-- Hide nav links on small screens, show on large screens -->
           {{#if email}}
           <a href="/logout"
-            class="inline-block hover:bg-teal-600 border border-[1px] rounded-full px-3 py-1 mx-1 text-black border-white">Log
+            class="inline-block hover:bg-gray-500 hover:bg-opacity-50 border border-1 border-white rounded-full px-3 py-1 mx-1 text-black">Log
             Out</a>
           {{else}}
           {{#if isLoggedIn}}
-          <a href="/mood"
+          <a href="/dashboard"
             class="inline-block hover:bg-teal-600 border border-[1px] rounded-full px-3 py-1 mx-1 text-black border-white">Mood</a>
           {{else}}
           <a href="/login"
-            class="{{#if isLogin}}hidden{{/if}} hover:bg-teal-600 inline-block border border-[1px] rounded-full px-3 py-1 mx-1 text-white border-white padding-right 2px">Login</a>
+            class="{{#if isLogin}}hidden{{/if}} hover:bg-gray-500 hover:bg-opacity-50 inline-block border border-1 rounded-full px-3 py-1 mx-1 text-white border-white pr-2">Login</a>
+
           <a href="/register"
-            class="{{#if isRegister}}hidden{{/if}} hover:bg-teal-600 inline-block border border-[1px] rounded-full px-3 py-1 mx-1 text-white border-white">Sign
+            class="{{#if isRegister}}hidden{{/if}} hover:bg-gray-500 hover:bg-opacity-50 inline-block border border-1 rounded-full px-3 py-1 mx-1 text-white border-white pr-2">Sign
             Up</a>
           {{/if}}
           {{/if}}

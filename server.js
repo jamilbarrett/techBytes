@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const { engine } = require("express-handlebars");
 const session = require("express-session");
+const flash = require('express-flash')
 
 // Import our db connection
 const db = require("./config/connection");
@@ -11,6 +12,7 @@ const db = require("./config/connection");
 // Import routes
 const user_routes = require("./controllers/user_routes");
 const view_routes = require("./controllers/view_routes");
+const article_routes = require("./controllers/article_routes");
 
 
 const app = express();
@@ -44,7 +46,7 @@ app.use(session({
 }));
 
 // Load Routes
-app.use("/", [view_routes, user_routes]);
+app.use("/", [view_routes, user_routes, article_routes]);
 
 // Connect to the db and create all tables based off of our models
 db.sync({ force: false })

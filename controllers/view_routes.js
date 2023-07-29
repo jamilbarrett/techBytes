@@ -37,6 +37,26 @@ router.get('/register', (req, res) => {
   });
 });
 
+// Sign up for submission
+router.post('/register', async (req, res) => {
+  const { email, password, username } = req.body;
+
+  try {
+    const newUser = await User.create({
+      email,
+      password, 
+      username
+    });
+
+    req.session.user_id = newUser.id;
+
+    res.redirect('/dashboard'); 
+  } catch (error) {
+    console.error(error);
+    res.redirect('/register'); // Redirect back to the sign-up page on error
+  }
+});
+
 
 
 router.get('/entry', isAuthenticated, async (req, res) => {

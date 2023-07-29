@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
     // User has been validated, create a session
     req.session.user_id = user.id;
 
-    res.redirect('/');
+    res.redirect('/dashboard');
 
   } catch (err) {
     console.error(err);
@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
 
 
 
-
+// Create User
 router.post('/register', async (req, res) => {
   try {
     // ValidatePasswords function

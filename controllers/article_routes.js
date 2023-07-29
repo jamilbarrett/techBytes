@@ -13,6 +13,29 @@ function isAuthenticated(req, res, next) {
 }
 
 
+// Get All Articles
+router.get('/articles', isAuthenticated, async (req, res) => {
+  try {
+    const user = await User.findByPk(req.session.user_id, {
+      include: Article
+    });
+
+    const articles = user.Articles; 
+
+    
+    res.json(articles);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred');
+  }
+});
+
+
+
+
+
+// Create Article 
 router.post('/entry', async (req, res) => {
   try {
     const user = await User.findByPk(req.session.user_id);
@@ -23,7 +46,7 @@ router.post('/entry', async (req, res) => {
 
     Article.create({ userId: user.id, title: newTitle, entry: newEntry});
     // redirect them after the data is obtained
-    res.redirect('/artilce');
+    res.send('/dashboard');
 
   } 
   catch (err) {
@@ -32,6 +55,8 @@ router.post('/entry', async (req, res) => {
 
 });
 
+
+// Delete Article
 router.delete('/entry/:id', isAuthenticated, async (req, res) => {
   try {
     const user = await User.findByPk(req.session.user_id, {
@@ -41,7 +66,7 @@ router.delete('/entry/:id', isAuthenticated, async (req, res) => {
     const articleId = req.params.id;
     const article = await Article.findOne({
       where: {
-        id: moodId,
+        id: articleId,
         userId: user.id
       }
     });
