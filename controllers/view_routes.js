@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/User');
-const Article = require('../models/Article')
+const Article = require('../models/Article');
 
 // Middleware
 function isAuthenticated(req, res, next) {
@@ -13,7 +13,6 @@ function isAuthenticated(req, res, next) {
 
 // Homepage
 router.get('/', (req, res) => {
-
   res.render('index', {
     isHome: true,
     isLoggedIn: req.session.user_id
@@ -29,7 +28,6 @@ router.get('/login', (req, res) => {
   });
 });
 
-
 // Sign up Page
 router.get('/register', (req, res) => {
   res.render('register', {
@@ -37,24 +35,11 @@ router.get('/register', (req, res) => {
   });
 });
 
-// Sign up for submission
-router.post('/register', async (req, res) => {
-  const { email, password, username } = req.body;
-
-  try {
-    const newUser = await User.create({
-      email,
-      password, 
-      username
-    });
-
-    req.session.user_id = newUser.id;
-
-    res.redirect('/dashboard'); 
-  } catch (error) {
-    console.error(error);
-    res.redirect('/register'); // Redirect back to the sign-up page on error
-  }
+// Dashboard Page
+router.get('/dashboard', (req, res) => {
+  res.render('dashboard', {
+    isDashboard: true
+  });
 });
 
 
@@ -67,6 +52,5 @@ router.get('/entry', isAuthenticated, async (req, res) => {
     username: user.username
   });
 });
-
 
 module.exports = router;

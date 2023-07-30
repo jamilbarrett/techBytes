@@ -16,18 +16,15 @@ function isAuthenticated(req, res, next) {
 // Get All Articles
 router.get('/articles', isAuthenticated, async (req, res) => {
   try {
-    const user = await User.findByPk(req.session.user_id, {
-      include: Article
+    const articles = await Article.findAll({
+      where: { userId: req.session.user_id },
+      order: [['createdAt', 'DESC']], // Sort by createdAt in descending order
     });
 
-    const articles = user.Articles; 
-
-    
     res.json(articles);
-
   } catch (error) {
     console.error(error);
-    res.status(500).send('An error occurred');
+    res.status(500).send('An error occurred while fetching articles.');
   }
 });
 
@@ -42,17 +39,21 @@ router.post('/entry', async (req, res) => {
     const newEntry = req.body.entry;
     const newTitle = req.body.title.toUpperCase();
 
+    // Create the new article
+    const createdArticle = await Article.create({
+      userId: user.id,
+      title: newTitle,
+      entry: newEntry
+    });
 
+    // Redirect the user to the newly created article's details page
+    res.redirect('/dashboard');
 
-    Article.create({ userId: user.id, title: newTitle, entry: newEntry});
-    // redirect them after the data is obtained
-    res.send('/dashboard');
-
-  } 
-  catch (err) {
+  } catch (err) {
     console.log(err);
+    // Handle the error appropriately, for example:
+    res.status(500).send('An error occurred while creating the article.');
   }
-
 });
 
 

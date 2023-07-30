@@ -1,87 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>techBytes</title>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>techBytes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
-  <div class="bg-white">
-    <header class="bg-cover bg-no-repeat bg-center py-12 h-25"
-      style="background-image: url('https://img.freepik.com/free-photo/black-white-bokeh-particles_1017-3297.jpg?w=1480&t=st=1690165315~exp=1690165915~hmac=232fed5ba5f9651703637731c814b22b76eceb150b3f23912e27f7258c983421');">
-      <div class="flex justify-between items-center">
-        <!-- Flexbox container for centering on small screens and left-aligning on large screens -->
-        <h1 class="text-5xl m-0 p-1">
-          <a class="text-blue-500 text-weight-bold text-5xl m-1" href="/">techBytes.</a>
-        </h1>
-        <button id="menuButton" class="md:hidden block pr-2">
-          <i class="fas fa-bars text-white text-9xl"></i>
-        </button>
-
-
-        <nav class="hidden md:flex mr-10 justify-center md:justify-end font-medium" id="navLinks">
-          <!-- Hide nav links on small screens, show on large screens -->
-          {{#if email}}
-          <a href="/logout"
-            class="inline-block hover:bg-gray-500 hover:bg-opacity-50 border border-1 border-white rounded-full px-3 py-1 mx-1 text-black">Log
-            Out</a>
-          {{else}}
-          {{#if isLoggedIn}}
-          <a href="/dashboard"
-            class="inline-block hover:bg-teal-600 border border-[1px] rounded-full px-3 py-1 mx-1 text-black border-white">Mood</a>
-          {{else}}
-          <a href="/login"
-            class="{{#if isLogin}}hidden{{/if}} hover:bg-gray-500 hover:bg-opacity-50 inline-block border border-1 rounded-full px-3 py-1 mx-1 text-white border-white pr-2">Login</a>
-
-          <a href="/register"
-            class="{{#if isRegister}}hidden{{/if}} hover:bg-gray-500 hover:bg-opacity-50 inline-block border border-1 rounded-full px-3 py-1 mx-1 text-white border-white pr-2">Sign
-            Up</a>
-          {{/if}}
-          {{/if}}
-          <p class="{{#if isHome}}hidden{{/if}}{{#if isLogin}} hidden{{/if}}{{#if isRegister}} hidden{{/if}}">Welcome,
-            {{email}}</p>
-        </nav>
-      </div>
-
-      <!-- Mobile Navigation Menu (hidden by default, shown when hamburger button is clicked) -->
-      <nav class="hidden text-center font-medium" id="mobileMenu">
-        {{#if email}}
-        <a href="/logout" class="hover:bg-teal-600 block my-2 text-white" style="color: white;">Log Out</a>
-        {{else}}
-        {{#if isLoggedIn}}
-        <a href="/entry" class="hover:bg-teal-600 block my-2">Mood</a>
-        {{else}}
-        <a href="/login"
-          class="{{#if isLogin}}hidden{{/if}} hover:bg-teal-600 text-white block my-2 padding-right 2px">Login</a>
-        <a href="/register" class="{{#if isRegister}}hidden{{/if}} hover:bg-teal-600 text-white block my-2">Sign Up</a>
-        {{/if}}
-        {{/if}}
-        <p
-          class="{{#if isHome}}hidden{{/if}}{{#if isLogin}} hidden{{/if}}{{#if isRegister}} hidden{{/if}} my-2 text-white">
-          Welcome,
-          {{username}}</p>
-      </nav>
-
-      <script>
-        document.getElementById('menuButton').addEventListener('click', function () {
-          let mobileMenu = document.getElementById('mobileMenu');
-          mobileMenu.classList.toggle('hidden');
-        });
-      </script>
-    </header>
-    {{{body}}}
-
-  </div>
-  <footer>
-
-  </footer>
+    <div class="bg-white">
+        <header class="header">techBytes
+            <nav>
+                <a href="/" class="{{#if isHome}}{{/if}}">Home</a>
+                {{#if email}}
+                <a href="/logout">Log Out</a>
+                {{else}}
+                {{#if isLoggedIn}}
+                <a href="/dashboard" class="{{#if isHome}}hidden{{/if}}">Dashboard</a>
+                {{else}}
+                <a href="/login" class="{{#if isLogin}}{{/if}}">Login</a>
+                <a href="/Register" class="{{#if isLogin}}{{/if}}">Register</a>
+                {{/if}}
+                {{/if}}
+                <p class="{{#if isHome}}{{/if}}{{#if isLogin}} {{/if}}{{#if isRegister}} {{/if}}">Welcome, {{username}}</p>
+            </nav>
+        </header>
+        {{{body}}}
+    </div>
+    <footer>
+    </footer>
 </body>
-
 </html>

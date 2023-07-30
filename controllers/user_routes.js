@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const User = require('../models/User');
 
-
+// Log In User
 router.post('/login', async (req, res) => {
   try {
-    const formIdentifier = req.body.email; // The name of the input field is email in handlebars
+    const formIdentifier = req.body.email;
     const formPassword = req.body.password;
 
     // Check if the identifier is an email format
@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
 
     // Handle user not found
     if (!user) {
-      console.log("user not found")
+      console.log("user not found");
       return res.redirect('/register');
     }
 
@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
 
     // Handle invalid password
     if (!isValidPass) {
-      console.log("invalid passwod, please try again")
+      console.log("invalid password, please try again");
       return res.redirect('/login');
     }
 
@@ -53,8 +53,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-
-
 // Create User
 router.post('/register', async (req, res) => {
   try {
@@ -68,24 +66,24 @@ router.post('/register', async (req, res) => {
 
     if (password !== verifyPassword) {
       // If passwords don't match, stop the registration process
+      console.log('Passwords dont match');
       return res.redirect('/register');
     }
 
-    // Check if the email is already taken
+    // Check if the email is taken
     const existingEmail = await User.findOne({ where: { email: req.body.email } });
     if (existingEmail) {
-      // Email is already taken, send a error message to the front end
-      // res.send('Email is already taken.' );
-      return res.redirect('/register');
+      // Email is already taken, send an error message to the front end
+      // res.send('Email is already taken.');
+      return res.redirect('/login');
     }
 
-    // Check if the username is already taken
+    // Check if the username is taken
     const existingUsername = await User.findOne({ where: { username: req.body.username } });
     if (existingUsername) {
-      // Username is already taken, send a error message to the front end
-      // res.send('Username is already taken.' );
-      return res.redirect('/register');
-
+      // Username is already taken, send an error message to the front end
+      // res.send('Username is already taken.');
+      return res.redirect('/login');
     }
 
     // Passwords match, and email/username are available, proceed with user creation
@@ -103,10 +101,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-
-
-
-//log out user
+// Log out user
 router.get('/logout', (req, res) => {
   req.session.destroy();
 

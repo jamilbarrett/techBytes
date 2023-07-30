@@ -1,32 +1,25 @@
-<section class="flex justify-around my-5">
-  <button class="new-entry bg-gradient-to-r from-orange-400 to-amber-500 hover:from-orange-500 hover:to-amber-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-colors duration-300" onclick="redirectToEntry()">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 20h.01M6 4h10a4 4 0 014 4v8a2 2 0 01-2 2H6a2 2 0 01-2-2V8a4 4 0 014-4z"/>
-    </svg>
-    Create Article
-  </button>
-
-{{!-- section that outputs the data from the tables --}}
-<section class = "p-8">
-  {{#each entry}}
-  <!-- Clickable link with entry ID as a parameter -->
-<div class="flex flex-col justify-center rounded-lg p-2 mx-2 my-8 shadow-lg hover:shadow-2xl mx-auto w-full max-w-4xl transform bg-gradient-to-b from-gray-500 to-gray-900  hover:-translate-y-1 hover:scale-105">
-  <a href="/dashboard/{{this.id}}" class="block">
-    <section class="transform hover:shadow-xl {{this.color}} rounded-lg p-4">
-      <p class="font-mono italic font-bold text-black text-center text-xl md:text-2xl lg:text-3xl">{{this.title}}</p>
-      <p class="font-sans truncate font-semibold text-center text-black p-4 m-4 bg-gray-200 text-sm md:text-base lg:text-lg">{{this.entry}}</p>
-    </section>
-  </a>
-</div>
+<!-- Dashboard Section: Displaying Existing Posts -->
+<h2>Your Posts</h2>
+<ul>
+  {{#each dashboard.articles}}
+  <li>
+    <h3>{{this.title}}</h3>
+    <p>{{this.content}}</p>
+    <a href="/post/{{this.id}}">Edit/Delete</a>
+  </li>
   {{/each}}
+</ul>
 
-</section>
-<script>
-  function redirectToEntry() {
-    window.location.href = "/entry";
-  }
+<!-- Form Section: Create a New Post -->
+<h2 class="text-center">Create a New Post</h2>
+<form action="/post" method="POST" class="max-w-sm mx-auto border rounded p-4">
+  <div class="flex flex-col space-y-4">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" required class="w-full p-2 border rounded">
 
-  function redirectToGraph() {
-    window.location.href = "/graph";
-    }
-</script>
+    <label for="content">Content</label>
+    <textarea id="content" name="content" required class="w-full h-32 p-2 border rounded"></textarea>
+
+    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create Article</button>
+  </div>
+</form>
