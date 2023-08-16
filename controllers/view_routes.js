@@ -1,6 +1,4 @@
 const router = require('express').Router();
-const User = require('../models/User');
-const Article = require('../models/Article');
 
 // Middleware
 function isAuthenticated(req, res, next) {
@@ -42,15 +40,5 @@ router.get('/dashboard', (req, res) => {
   });
 });
 
-
-
-router.get('/entry', isAuthenticated, async (req, res) => {
-  const user = await User.findByPk(req.session.user_id);
-
-  res.render('entry', {
-    email: user.email,
-    username: user.username
-  });
-});
 
 module.exports = router;

@@ -1,9 +1,13 @@
-
-
 .bg-stone-950 {
-    background-color: #2b2d42;
-    min-height: 100vh; /* Set the minimum height to 100% of the viewport height */
-  }
-  
+  background-color: #2b2d42;
+  min-height: 100vh;
+  /* Set the minimum height to 100% of the viewport height */
+}
 
-  
+
+
+.bg-graffiti {
+  background-image: url('./images/graffiti.png');
+  background-size: cover;
+}
+

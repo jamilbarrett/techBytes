@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require("express");
 const { engine } = require("express-handlebars");
 const session = require("express-session");
-const flash = require('express-flash')
 
 // Import our db connection
 const db = require("./config/connection");

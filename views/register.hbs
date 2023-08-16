@@ -1,11 +1,25 @@
-<div class="register-container">
-  <form id="register-form" class="register" action="/register" method="POST">
-    <input class="input input-email my-2 px-4" name="email" type="email" placeholder="Email">
-    <input class="input input-username my-2 px-4" name="username" type="text" placeholder="Username">
-    <input class="input my-2 px-4" name="password" type="password" placeholder="Password">
-    <input class="input my-2 px-4" name="verifyPassword" type="password" placeholder="Confirm Your Password">
-    <button class="">Sign up</button>
+<div class="max-w-md mx-auto bg-white border rounded-lg shadow p-6">
+  <h2 class="text-center text-xl font-bold mb-4">Sign Up</h2>
+  <form action="/dashboard" method="GET" class="flex flex-col space-y-4">
+
+
+    <!-- User Input Fields: Username -->
+    <label for="title" class="font-semibold">Username</label>
+    <input type="text" id="title" name="title" required class="w-full p-2 border rounded">
+
+
+    <!-- User Input Fields: Email-->
+    <label for="title" class="font-semibold">Email</label>
+    <input type="text" id="title" name="title" required class="w-full p-2 border rounded">
+
+
+    <!-- User Input Fields: Password-->
+    <label for="content" class="font-semibold">password</label>
+    <input type="text" id="title" name="title" required class="w-full p-2 border rounded">
+
+    <!-- Submit Button -->
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Get
+      Started</button>
+
   </form>
 </div>
-
-<div id="error-message-container"></div>

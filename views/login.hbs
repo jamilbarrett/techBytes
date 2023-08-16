@@ -1,12 +1,18 @@
+<div class="flex">
+  <div class="left-half bg-cover bg-center h-screen w-1/2" style="background-image: url('https://img.freepik.com/free-photo/rebel-youth-spray-chaos-onto-weathered-walls-generated-by-ai_188544-15063.jpg?t=st=1690684854~exp=1690688454~hmac=ab2b015e0b51a422242b35842be3efb0fc2559066c5f565644324054ccca41bc&w=2000');"></div>
+  <div class="max-w-md mx-auto bg-white border rounded-lg shadow p-6 w-1/2">
+    <h2 class="text-center text-xl font-bold mb-4">Login</h2>
+    <form action="/dashboard" method="GET" class="flex flex-col space-y-4">
+      <!-- Title Field -->
+      <label for="title" class="font-semibold">username or email</label>
+      <input type="text" id="title" name="title" required class="w-full p-2 border rounded">
 
+      <!-- Content Field -->
+      <label for="content" class="font-semibold">password</label>
+      <input type="password" id="content" name="content" required class="w-full p-2 border rounded">
 
-<form id="login-form" class="login" action="/login" method="POST">
-    <input class="user my-2 px-4" name="email" type="text" placeholder="username or email">
-    <input class="pass my-2 px-4" name="password" type="password" placeholder="enter password">
-    <button>Log in</button>
-</form>
-
-
-<div id="error-message-container-login"></div>
-
-<script src="/js/error.js"></script>
+      <!-- Submit Button -->
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Login</button>
+    </form>
+  </div>
+</div>
